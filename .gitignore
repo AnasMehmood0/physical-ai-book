@@ -1,0 +1,23 @@
+# Gitignore for Physical AI Book Project
+# General ignores
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.log
+.env*
+
+# Node.js/Docusaurus specific ignores (for the 'web' directory)
+web/
+node_modules/
+.vscode/
+.idea/
+
+# Other potential ignores
+__pycache__/
+venv/
+.venv/
+*.pyc
+dist/
+build/
+*.egg-info/

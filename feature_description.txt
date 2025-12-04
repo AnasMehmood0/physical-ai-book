@@ -1,0 +1,34 @@
+Feature: Deep Syllabus Restructuring
+
+Goal: Rebuild the book with a nested folder structure to match the detailed "Physical AI" syllabus.
+
+Requirements:
+
+Clean Slate: Delete all existing flat files in web/docs/.
+
+Module 1 (Foundations): Create folder web/docs/01-foundations/.
+
+Create 01-embodied-intelligence.md (Intro, Why Physical AI).
+
+Create 02-hardware-lab.md (Sim Rig vs Edge Kit specs).
+
+Module 2 (ROS 2): Create folder web/docs/02-ros2/.
+
+Create 01-architecture.md (Nodes, Topics, Services).
+
+Create 02-python-code.md (rclpy examples).
+
+Module 3 (Simulation): Create folder web/docs/03-simulation/.
+
+Create 01-gazebo-physics.md (URDF, Gravity, Collisions).
+
+Create 02-unity-hri.md (High-fidelity rendering).
+
+Module 4 (Isaac Sim): Create folder web/docs/04-isaac/.
+
+Create 01-isaac-sdk.md (VSLAM, Nav2).
+
+Create 02-reinforcement-learning.md (Sim-to-Real).
+
+Module 5 (VLA & Capstone): Create folder web/docs/05-vla/.\n\nCreate 01-whisper-voice.md (Voice-to-Action).\n\nCreate 02-capstone-project.md (The Autonomous Humanoid pipeline).\n
+Content Constraint: Fill all files with detailed academic content based on the provided syllabus.
