@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     # Initialize VectorStore and ingest documents on startup
     vector_store = VectorStore()
-    if os.path.exists("temp_book"):
-        ingest_documents("temp_book", vector_store)
+    if os.path.exists("web/docs"):
+        ingest_documents("web/docs", vector_store)
     app.state.vector_store = vector_store
     yield
     # No cleanup needed for in-memory vector store
