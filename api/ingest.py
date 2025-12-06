@@ -30,10 +30,28 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
                 print(f"Ingested {len(chunks)} chunks from {file}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Ingest book content into the vector database.")
-    parser.add_argument("directory", type=str, help="The directory containing the book content (.txt files).")
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description="Ingest book content into the vector database.")
+    # parser.add_argument("directory", type=str, help="The directory containing the book content (.txt files).")
+    # args = parser.parse_args()
 
-    vs = VectorStore()
-    ingest_documents(args.directory, vs)
-    print("Ingestion complete.")
+    # Test MarkdownTextSplitter
+    markdown_document = """
+# Header 1
+This is some text under header 1.
+
+## Header 2
+This is some text under header 2.
+
+### Header 3
+This is some text under header 3.
+"""
+    test_splitter = MarkdownTextSplitter(chunk_size=50, chunk_overlap=0)
+    test_chunks = test_splitter.split_text(markdown_document)
+    print("--- Test Chunks ---")
+    for i, chunk in enumerate(test_chunks):
+        print(f"Chunk {i}: {chunk}")
+    print("-------------------")
+
+    # vs = VectorStore()
+    # ingest_documents(args.directory, vs)
+    # print("Ingestion complete.")
