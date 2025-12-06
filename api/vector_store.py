@@ -58,6 +58,7 @@ class VectorStore:
             A list of search results.
         """
         query_embedding = self.embedding_model.get_embedding(query)
+        print(f"Query: {query}")
 
         query_filter = None
         if filter_dict:
@@ -75,5 +76,13 @@ class VectorStore:
             query=query_embedding,
             query_filter=query_filter,
             limit=top_k,
+            with_payload=True
         )
-        return search_result.points
+        print(f"Search result from qdrant: {search_result}")
+
+        if search_result.points:
+            print(f"Found {len(search_result.points)} points.")
+            return search_result.points
+        else:
+            print("No points found.")
+            return []
