@@ -1,14 +1,79 @@
-from qdrant_client import QdrantClient
-from qdrant_client.http.models import Distance, VectorParams
+import uuid
+from qdrant_client import QdrantClient, models
+
+from api.embedding_model import EmbeddingModel
 
 
-def initialize_qdrant_client():
-    client = QdrantClient(location=":memory:")  # Use in-memory Qdrant
-    collection_name = "physical_ai_book"
+class VectorStore:
+    def __init__(self, collection_name: str = "book_chunks"):
+        """
+        Initializes the vector store.
+        Args:
+            collection_name: The name of the Qdrant collection to use.
+        """
+        self.client = QdrantClient(":memory:")  # Use in-memory storage for now
+        self.collection_name = collection_name
+        self.embedding_model = EmbeddingModel()
 
-    client.recreate_collection(
-        collection_name=collection_name,
-        vectors_config=VectorParams(size=384, distance=Distance.COSINE),
-    )
-    print(f"Qdrant client initialized and collection '{collection_name}' created/recreated.")
-    return client
+        # Create collection if it doesn't exist
+        try:
+            self.client.get_collection(collection_name=self.collection_name)
+        except Exception:
+            self.client.create_collection(
+                collection_name=self.collection_name,
+                vectors_config=models.VectorParams(
+                    size=self.embedding_model.model.get_sentence_embedding_dimension(),
+                    distance=models.Distance.COSINE,
+                ),
+            )
+
+    def add_documents(self, documents: list[str], metadatas: list[dict]):
+        """
+        Adds documents to the vector store.
+        Args:
+            documents: A list of documents to add.
+            metadatas: A list of metadata dictionaries corresponding to the documents.
+        """
+        embeddings = [self.embedding_model.get_embedding(doc) for doc in documents]
+        ids = [str(uuid.uuid4()) for _ in documents]
+
+        self.client.upsert(
+            collection_name=self.collection_name,
+            points=models.Batch(
+                ids=ids,
+                vectors=embeddings,
+                payloads=metadatas,
+            ),
+            wait=True,
+        )
+
+    def query(self, query: str, filter_dict: dict = None, top_k: int = 3):
+        """
+        Queries for documents in the vector store.
+        Args:
+            query: The query to search for.
+            filter_dict: A dictionary to filter the search results.
+            top_k: The number of results to return.
+        Returns:
+            A list of search results.
+        """
+        query_embedding = self.embedding_model.get_embedding(query)
+
+        query_filter = None
+        if filter_dict:
+            query_filter = models.Filter(
+                must=[
+                    models.FieldCondition(
+                        key=key, match=models.MatchValue(value=value)
+                    )
+                    for key, value in filter_dict.items()
+                ]
+            )
+
+        search_result = self.client.query_points(
+            collection_name=self.collection_name,
+            query=query_embedding,
+            query_filter=query_filter,
+            limit=top_k,
+        )
+        return search_result.points

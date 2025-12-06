@@ -1,58 +1,25 @@
 import os
-from unittest.mock import MagicMock
+import shutil
 import pytest
-from api.ingest import read_markdown_file, recursive_character_chunking, upsert_chunks_to_qdrant
+from api.ingest import ingest_documents
+from api.vector_store import VectorStore
 
-# Mock data for testing
-TEST_MD_CONTENT = """
-# Chapter 1
+@pytest.fixture
+def temp_dir():
+    dir_path = "temp_test_book"
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
+    with open(os.path.join(dir_path, "test_chapter.txt"), "w") as f:
+        f.write("This is a test chapter.")
+    yield dir_path
+    shutil.rmtree(dir_path)
 
-## Section 1
-
-This is some content for section 1.
-
-## Section 2
-
-This is some content for section 2.
-"""
-
-# Test T008: Create unit test for markdown file reading
-def test_read_markdown_file(tmp_path):
-    file_path = tmp_path / "test.md"
-    file_path.write_text(TEST_MD_CONTENT)
-    content = read_markdown_file(str(file_path))
-    assert content == TEST_MD_CONTENT
-
-# Test T009: Create unit test for recursive character chunking
-def test_recursive_character_chunking():
-    chunks = recursive_character_chunking(TEST_MD_CONTENT)
-    assert isinstance(chunks, list)
-    assert len(chunks) > 0
-    for chunk in chunks:
-        assert isinstance(chunk, str)
-        assert len(chunk) <= 1000  # Default chunk size
-
-# Test T010: Create integration test for upserting chunks into Qdrant
-def test_upsert_chunks_to_qdrant():
-    # Mock Qdrant client and embedding model
-    mock_qdrant_client = MagicMock()
-    mock_embedding_model = MagicMock()
-    mock_embedding_model.embed_documents.return_value = [[0.1]*384, [0.2]*384]
-
-    # Dummy chunks and chapter_id
-    chunks = ["chunk 1", "chunk 2"]
-    chapter_id = "chapter_test"
-
-    upsert_chunks_to_qdrant(mock_qdrant_client, mock_embedding_model, chunks, chapter_id)
-
-    mock_embedding_model.embed_documents.assert_called_once_with(chunks)
-    mock_qdrant_client.upsert.assert_called_once()
-    args, kwargs = mock_qdrant_client.upsert.call_args
-    assert kwargs["collection_name"] == "physical_ai_book"
-    points = kwargs["points"]
-    assert len(points) == len(chunks)
-    for point in points:
-        assert point.payload["chapter_id"] == chapter_id
-        assert "chunk_content" in point.payload
-        assert len(point.vector) == 384
-
+def test_ingest_documents(temp_dir):
+    vector_store = VectorStore(collection_name="test_collection")
+    ingest_documents(temp_dir, vector_store)
+    
+    # Search for a document to see if it was ingested
+    search_result = vector_store.query("test chapter")
+    
+    assert len(search_result) > 0
+    assert search_result[0].payload["source"] == "test_chapter.txt"

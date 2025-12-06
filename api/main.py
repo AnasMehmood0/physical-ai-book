@@ -1,87 +1,63 @@
-import logging
-import json
-
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List
+from typing import Optional
+import contextlib
 
-from qdrant_client.http.models import Filter, FieldCondition, Range
+from api.vector_store import VectorStore
+from api.ingest import ingest_documents
+import os
 
-from api.vector_store import initialize_qdrant_client
-from api.embedding_model import load_embedding_model
+@contextlib.asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize VectorStore and ingest documents on startup
+    vector_store = VectorStore()
+    if os.path.exists("temp_book"):
+        ingest_documents("temp_book", vector_store)
+    app.state.vector_store = vector_store
+    yield
+    # No cleanup needed for in-memory vector store
 
-# Configure structured logging
-logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
-formatter = logging.Formatter('{"time": "%(asctime)s", "level": "%(levelname)s", "message": "%(message)s"}')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+app = FastAPI(lifespan=lifespan)
 
-app = FastAPI()
-
-origins = [
-    "*"
-]
-
+# Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class AskRequest(BaseModel:
+class AskRequest(BaseModel):
     question: str
-    chapter_id: str
+    chapter_id: Optional[str] = None
 
-class Chunk(BaseModel):
-    chapter_id: str
-    chunk_content: str
-
-@app.get("/")
-async def root():
-    logger.info("Root endpoint accessed")
-    return {"message": "Hello RAG Chatbot!"}
-
-@app.post("/ask", response_model=List[Chunk])
-async def ask_question(
-    request: AskRequest,
-    qdrant_client = Depends(initialize_qdrant_client),
-    embedding_model = Depends(load_embedding_model),
-):
-    try:
-        logger.info(f"Received ask_question request for chapter_id: {request.chapter_id}")
-        # Embed the question
-        query_embedding = embedding_model.embed_documents([request.question])[0].tolist()
-
-        # Filter for the specific chapter_id and retrieve top 3 relevant chunks
-        search_result = qdrant_client.search(
-            collection_name="physical_ai_book",
-            query_vector=query_embedding,
-            query_filter=Filter(
-                must=[
-                    FieldCondition(
-                        key="chapter_id",
-                        range=Range(
-                            gte=request.chapter_id,
-                            lte=request.chapter_id
-                        )
-                    )
-                ]
-            ),
-            limit=3,
+@app.post("/ask")
+def ask(request: Request, ask_request: AskRequest):
+    """
+    Accepts a question and returns relevant chunks from the book.
+    """
+    vector_store: VectorStore = request.app.state.vector_store
+    
+    filter_dict = None
+    if ask_request.chapter_id:
+        filter_dict = {"chapter_id": ask_request.chapter_id}
+        
+    search_results = vector_store.query(
+        query=ask_request.question,
+        filter_dict=filter_dict,
+        top_k=3
+    )
+    
+    # Format the response
+    response_chunks = []
+    for result in search_results:
+        response_chunks.append(
+            {
+                "payload": result.payload,
+                "score": result.score,
+            }
         )
-
-        # Extract and return the relevant chunk content
-        results = [
-            Chunk(chapter_id=hit.payload["chapter_id"], chunk_content=hit.payload["chunk_content"])
-            for hit in search_result
-        ]
-        logger.info(f"Successfully processed ask_question request, returned {len(results)} chunks")
-        return results
-    except Exception as e:
-        logger.error(f"Error processing ask_question: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
+        
+    return {"results": response_chunks}

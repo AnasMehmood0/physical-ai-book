@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RAG Chatbot Backend API",
+    "version": "1.0.0",
+    "description": "API for the RAG Chatbot Backend"
+  },
+  "paths": {
+    "/ask": {
+      "post": {
+        "summary": "Get relevant content chunks for a question",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AskRequest": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "chapter_id": {
+            "type": "string"
+          },
+          "selected_text": {
+            "type": "string"
+          }
+        },
+        "required": ["question", "chapter_id"]
+      },
+      "AskResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentChunk"
+            }
+          }
+        }
+      },
+      "ContentChunk": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payload": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string"
+              },
+              "chapter_id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

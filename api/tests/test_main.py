@@ -1,73 +1,50 @@
-import pytest
-from unittest.mock import MagicMock
 from fastapi.testclient import TestClient
 from api.main import app
+import os
+import shutil
 
-# Mocking dependencies for isolation
-# These mocks will be used by all tests in this file
-pytest.qdrant_client = MagicMock()
-pytest.embedding_model = MagicMock()
+# This setup is a bit tricky, because the main app ingests data on startup.
+# For a robust test, we should control the data ingestion.
+# One way is to have a separate endpoint for testing to trigger ingestion,
+# or to mock the vector_store object.
 
-# Override FastAPI dependencies for testing
-app.dependency_overrides[initialize_qdrant_client] = lambda: pytest.qdrant_client
-app.dependency_overrides[load_embedding_model] = lambda: pytest.embedding_model
+# For now, let's rely on the startup event and the dummy data.
+# We'll create the dummy data here again to make the test self-contained.
 
-client = TestClient(app)
+def setup_module(module):
+    """ setup any state specific to the execution of the given module."""
+    if not os.path.exists("temp_book"):
+        os.makedirs("temp_book")
+    with open("temp_book/chapter1.txt", "w") as f:
+        f.write("This is a test about AI.\n")
+    with open("temp_book/chapter2.txt", "w") as f:
+        f.write("This is a test about LLMs.\n")
 
-# Test T016: Create unit test for /ask endpoint request parsing
-def test_ask_endpoint_request_parsing():
-    response = client.post(
-        "/ask", json={
-            "question": "What is AI?",
-            "chapter_id": "chapter1"
-            }
-    )
-    assert response.status_code == 200
-    # Further assertions can be added to check if the mock client was called correctly
+def teardown_module(module):
+    """ teardown any state that was previously setup with a setup_module
+    method.
+    """
+    if os.path.exists("temp_book"):
+        shutil.rmtree("temp_book")
 
-# Test T017: Create unit test for Qdrant filtering by chapter_id
-def test_qdrant_filtering_by_chapter_id():
-    # Mock the Qdrant client's search method
-    pytest.qdrant_client.search.return_value = [
-        MagicMock(payload={"chapter_id": "chapter1", "chunk_content": "AI content 1"}),
-        MagicMock(payload={"chapter_id": "chapter1", "chunk_content": "AI content 2"}),
-    ]
 
-    # Make a dummy request to trigger the search logic
-    client.post(
-        "/ask", json={
-            "question": "Test question",
-            "chapter_id": "chapter1"
-            }
-    )
+def test_ask_endpoint():
+    with TestClient(app) as client:
+        response = client.post("/ask", json={"question": "What is this about?"})
+        assert response.status_code == 200
+        data = response.json()
+        assert "results" in data
+        assert len(data["results"]) > 0
+        assert "payload" in data["results"][0]
+        assert "score" in data["results"][0]
 
-    # Assert that qdrant_client.search was called with the correct filter
-    pytest.qdrant_client.search.assert_called_once()
-    args, kwargs = pytest.qdrant_client.search.call_args
-    assert kwargs["query_filter"].field == "chapter_id"
-    assert kwargs["query_filter"].range.gte == "chapter1"
-    assert kwargs["query_filter"].range.lte == "chapter1"
-
-# Test T018: Create integration test for /ask endpoint (full RAG flow)
-def test_ask_endpoint_full_rag_flow():
-    # Mock embedding model to return consistent embeddings
-    pytest.embedding_model.embed_documents.return_value = [[0.1] * 384]
-
-    # Mock Qdrant client search to return predefined chunks
-    pytest.qdrant_client.search.return_value = [
-        MagicMock(payload={"chapter_id": "chapter1", "chunk_content": "Relevant chunk 1"}),
-        MagicMock(payload={"chapter_id": "chapter1", "chunk_content": "Relevant chunk 2"}),
-    ]
-
-    response = client.post(
-        "/ask", json={
-            "question": "What is AI?",
-            "chapter_id": "chapter1"
-            }
-    )
-    assert response.status_code == 200
-    data = response.json()
-    assert "results" in data
-    assert len(data["results"]) == 2
-    assert data["results"][0]["chunk_content"] == "Relevant chunk 1"
-    assert data["results"][1]["chunk_content"] == "Relevant chunk 2"
+def test_ask_endpoint_with_filter():
+    with TestClient(app) as client:
+        response = client.post("/ask", json={"question": "What is this about?", "chapter_id": "chapter1"})
+        assert response.status_code == 200
+        data = response.json()
+        assert "results" in data
+        assert len(data["results"]) > 0
+        # Check if all results are from chapter1
+        for result in data["results"]:
+            assert result["payload"]["chapter_id"] == "chapter1"
