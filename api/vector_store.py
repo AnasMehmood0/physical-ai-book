@@ -12,6 +12,16 @@ class VectorStore:
             collection_name: The name of the Qdrant collection to use.
         """
         self.client = QdrantClient(path="./qdrant_storage")  # Use file-based storage
+        self.collection_name = collection_name
+        self.embedding_model = EmbeddingModel()
+
+        self.client.recreate_collection(
+            collection_name=self.collection_name,
+            vectors_config=models.VectorParams(
+                size=self.embedding_model.model.get_sentence_embedding_dimension(),
+                distance=models.Distance.COSINE,
+            ),
+        )
 
     def add_documents(self, documents: list[str], metadatas: list[dict]):
         """
