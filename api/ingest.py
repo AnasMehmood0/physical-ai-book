@@ -14,7 +14,7 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
 
     for root, _, files in os.walk(directory_path):
         for file in files:
-            if file.endswith(".txt"): # Assuming .txt files for now
+            if file.endswith((".txt", ".md")):
                 file_path = os.path.join(root, file)
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
