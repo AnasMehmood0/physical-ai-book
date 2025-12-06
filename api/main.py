@@ -3,10 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import contextlib
+import logging
 
 from api.vector_store import VectorStore
 from api.ingest import ingest_documents
 import os
+
+logger = logging.getLogger(__name__)
 
 @contextlib.asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -32,6 +35,11 @@ app.add_middleware(
 class AskRequest(BaseModel):
     question: str
     chapter_id: Optional[str] = None
+
+@app.get("/")
+async def root():
+    logger.info("Root endpoint accessed")
+    return {"message": "Hello RAG Chatbot!"}
 
 @app.post("/ask")
 def ask(request: Request, ask_request: AskRequest):
