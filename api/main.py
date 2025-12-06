@@ -19,7 +19,8 @@ async def lifespan(app: FastAPI):
         ingest_documents("web/docs", vector_store)
     app.state.vector_store = vector_store
     yield
-    # No cleanup needed for in-memory vector store
+    print("Closing Qdrant client")
+    app.state.vector_store.client.close()
 
 app = FastAPI(lifespan=lifespan)
 
