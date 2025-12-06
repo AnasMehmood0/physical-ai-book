@@ -15,17 +15,13 @@ class VectorStore:
         self.collection_name = collection_name
         self.embedding_model = EmbeddingModel()
 
-        # Create collection if it doesn't exist
-        try:
-            self.client.get_collection(collection_name=self.collection_name)
-        except Exception:
-            self.client.create_collection(
-                collection_name=self.collection_name,
-                vectors_config=models.VectorParams(
-                    size=self.embedding_model.model.get_sentence_embedding_dimension(),
-                    distance=models.Distance.COSINE,
-                ),
-            )
+        self.client.recreate_collection(
+            collection_name=self.collection_name,
+            vectors_config=models.VectorParams(
+                size=self.embedding_model.model.get_sentence_embedding_dimension(),
+                distance=models.Distance.COSINE,
+            ),
+        )
 
     def add_documents(self, documents: list[str], metadatas: list[dict]):
         """
