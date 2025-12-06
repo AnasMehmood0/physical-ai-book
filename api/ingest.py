@@ -1,4 +1,5 @@
 import os
+import argparse
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from api.vector_store import VectorStore
 
@@ -29,17 +30,10 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
                 print(f"Ingested {len(chunks)} chunks from {file}")
 
 if __name__ == "__main__":
-    # This is an example of how to run the ingestion.
-    # The actual directory should be provided.
-    # For now, we will create a dummy directory and file for testing.
-    vs = VectorStore()
-    
-    # Create dummy data for demonstration
-    if not os.path.exists("temp_book"):
-        os.makedirs("temp_book")
-    with open("temp_book/chapter1.txt", "w") as f:
-        f.write("This is the first chapter of the book about AI.\n" * 20)
-    with open("temp_book/chapter2.txt", "w") as f:
-        f.write("This is the second chapter, focusing on LLMs.\n" * 20)
+    parser = argparse.ArgumentParser(description="Ingest book content into the vector database.")
+    parser.add_argument("directory", type=str, help="The directory containing the book content (.txt files).")
+    args = parser.parse_args()
 
-    ingest_documents("temp_book", vs)
+    vs = VectorStore()
+    ingest_documents(args.directory, vs)
+    print("Ingestion complete.")
