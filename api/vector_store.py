@@ -11,7 +11,7 @@ class VectorStore:
         Args:
             collection_name: The name of the Qdrant collection to use.
         """
-        self.client = QdrantClient(":memory:")  # Use in-memory storage for now
+        self.client = QdrantClient(path="qdrant_db")  # Use file-based storage
         self.collection_name = collection_name
         self.embedding_model = EmbeddingModel()
 
@@ -58,7 +58,6 @@ class VectorStore:
             A list of search results.
         """
         query_embedding = self.embedding_model.get_embedding(query)
-        print(f"Query: {query}")
 
         query_filter = None
         if filter_dict:
@@ -78,11 +77,4 @@ class VectorStore:
             limit=top_k,
             with_payload=True
         )
-        print(f"Search result from qdrant: {search_result}")
-
-        if search_result.points:
-            print(f"Found {len(search_result.points)} points.")
-            return search_result.points
-        else:
-            print("No points found.")
-            return []
+        return search_result.points
