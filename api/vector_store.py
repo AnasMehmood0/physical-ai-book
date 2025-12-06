@@ -18,7 +18,9 @@ class VectorStore:
         # Create collection if it doesn't exist
         try:
             self.client.get_collection(collection_name=self.collection_name)
-        except Exception:
+            print(f"Collection '{self.collection_name}' already exists.")
+        except Exception as e:
+            print(f"Collection '{self.collection_name}' not found. Creating it. Error: {e}")
             self.client.create_collection(
                 collection_name=self.collection_name,
                 vectors_config=models.VectorParams(
@@ -34,6 +36,7 @@ class VectorStore:
             documents: A list of documents to add.
             metadatas: A list of metadata dictionaries corresponding to the documents.
         """
+        print(f"Adding {len(documents)} documents to collection {self.collection_name}")
         embeddings = [self.embedding_model.get_embedding(doc) for doc in documents]
         ids = [str(uuid.uuid4()) for _ in documents]
 
@@ -58,6 +61,7 @@ class VectorStore:
             A list of search results.
         """
         query_embedding = self.embedding_model.get_embedding(query)
+        print(f"Query: {query}")
 
         query_filter = None
         if filter_dict:
@@ -77,4 +81,11 @@ class VectorStore:
             limit=top_k,
             with_payload=True
         )
-        return search_result.points
+        print(f"Search result from qdrant: {search_result}")
+
+        if search_result.points:
+            print(f"Found {len(search_result.points)} points.")
+            return search_result.points
+        else:
+            print("No points found.")
+            return []
