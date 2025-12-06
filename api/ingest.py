@@ -10,7 +10,7 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
         directory_path: The path to the directory containing the documents.
         vector_store: An instance of the VectorStore.
     """
-    text_splitter = MarkdownTextSplitter(chunk_size=1000, chunk_overlap=200)
+    text_splitter = MarkdownTextSplitter(chunk_size=256, chunk_overlap=32)
 
     for root, _, files in os.walk(directory_path):
         for file in files:
