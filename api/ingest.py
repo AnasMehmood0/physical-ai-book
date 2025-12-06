@@ -20,6 +20,9 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
                     content = f.read()
                 
                 chunks = text_splitter.split_text(content)
+                print(f"File: {file_path}, number of chunks: {len(chunks)}")
+                if chunks:
+                    print(f"First chunk of {file}: {chunks[0][:100]}...")
                 
                 # Assuming chapter_id is derived from the file name or path
                 # This needs to be adapted to the actual book structure
