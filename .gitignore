@@ -8,7 +8,9 @@ Thumbs.db
 .env*
 
 # Node.js/Docusaurus specific ignores (for the 'web' directory)
-web/
+web/node_modules/
+web/build/
+web/.docusaurus/
 node_modules/
 .vscode/
 .idea/
@@ -21,3 +23,5 @@ venv/
 dist/
 build/
 *.egg-info/
+.vercel
+.env*.local
