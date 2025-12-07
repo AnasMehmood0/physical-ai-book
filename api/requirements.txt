@@ -1,9 +1,2 @@
 fastapi
-uvicorn
-qdrant-client
-sentence-transformers
-langchain-core
-langchain-text-splitters
-pytest
 python-dotenv
-requests
