@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/main.py"
+    }
+  ],
+  "env": {
+    "QDRANT_MODE": "memory",
+    "EMBEDDING_MODEL_NAME": "all-MiniLM-L6-v2",
+    "CHUNK_SIZE": "256",
+    "CHUNK_OVERLAP": "32"
+  }
+}
