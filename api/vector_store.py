@@ -2,7 +2,7 @@ import uuid
 import os
 from qdrant_client import QdrantClient, models
 
-from api.embedding_model import EmbeddingModel
+from embedding_model import EmbeddingModel
 
 
 class VectorStore:

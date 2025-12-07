@@ -7,13 +7,21 @@ import logging
 import os
 from dotenv import load_dotenv
 
-from api.vector_store import VectorStore
-from api.ingest import ingest_documents
-from api.llm_service import LLMService
+# Use relative imports that work better on Vercel
+try:
+    from vector_store import VectorStore
+    from ingest import ingest_documents
+    from llm_service import LLMService
+except ImportError:
+    from api.vector_store import VectorStore
+    from api.ingest import ingest_documents
+    from api.llm_service import LLMService
 
 # Load environment variables from .env file
 load_dotenv()
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @contextlib.asynccontextmanager
@@ -75,7 +83,11 @@ class AskRequest(BaseModel):
 @app.get("/")
 async def root():
     logger.info("Root endpoint accessed")
-    return {"message": "Hello RAG Chatbot!"}
+    return {"message": "Physical AI RAG Chatbot API", "status": "online"}
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
 
 @app.post("/ask")
 def ask(request: Request, ask_request: AskRequest):

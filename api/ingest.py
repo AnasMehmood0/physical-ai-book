@@ -2,7 +2,7 @@ import os
 import argparse
 from dotenv import load_dotenv
 from langchain_text_splitters import MarkdownTextSplitter
-from api.vector_store import VectorStore
+from vector_store import VectorStore
 
 # Load environment variables
 load_dotenv()
