@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/physical-ai-book/(.*)",
+      "destination": "/$1"
+    }
+  ],
+  "trailingSlash": false
+}
