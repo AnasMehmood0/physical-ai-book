@@ -18,13 +18,16 @@ logger = logging.getLogger(__name__)
 
 @contextlib.asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize VectorStore and ingest documents on startup
+    # Initialize VectorStore
     vector_store = VectorStore()
 
-    # Get docs directory from environment
-    docs_dir = os.getenv("DOCS_DIRECTORY", "web/docs")
-    if os.path.exists(docs_dir):
-        ingest_documents(docs_dir, vector_store)
+    # Only ingest documents on startup in local mode
+    # For cloud mode, documents should be ingested separately
+    qdrant_mode = os.getenv("QDRANT_MODE", "local")
+    if qdrant_mode == "local":
+        docs_dir = os.getenv("DOCS_DIRECTORY", "web/docs")
+        if os.path.exists(docs_dir):
+            ingest_documents(docs_dir, vector_store)
 
     app.state.vector_store = vector_store
 
