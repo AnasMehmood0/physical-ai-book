@@ -140,6 +140,37 @@ Your Answer:"""
         except (KeyError, IndexError) as e:
             raise Exception(f"Unexpected API response format: {str(e)}")
 
+    def generate_direct_answer(self, question: str, max_tokens: int = 500) -> str:
+        """
+        Generate a direct answer without RAG context (normal chatbot mode).
+
+        Args:
+            question: User's question
+            max_tokens: Maximum tokens in response
+
+        Returns:
+            Generated answer as string
+        """
+        prompt = f"""You are a helpful AI assistant specializing in Physical AI, robotics, and embodied intelligence.
+
+User Question: {question}
+
+Instructions:
+1. Provide a helpful, informative answer about Physical AI topics
+2. Be conversational and educational, like a knowledgeable tutor
+3. If the question is about Physical AI topics (sensors, actuators, locomotion, computer vision, control systems, manipulation, sim-to-real, etc.), provide a detailed explanation
+4. If you're not sure about specific details, be honest about it
+5. Keep your answer concise but informative (2-4 paragraphs)
+
+Note: You are currently running in normal chatbot mode. For answers based on the Physical AI Book content, the book database needs to be ingested.
+
+Your Answer:"""
+
+        try:
+            return self._call_gemini_api(prompt, max_tokens)
+        except Exception as e:
+            return f"I apologize, but I'm having trouble generating a response right now: {str(e)}"
+
     def generate_simple_response(self, question: str, max_tokens: int = 300) -> str:
         """
         Generate a response without context (fallback).

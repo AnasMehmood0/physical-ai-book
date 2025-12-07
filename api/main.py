@@ -92,65 +92,77 @@ async def health():
 @app.post("/ask")
 def ask(request: Request, ask_request: AskRequest):
     """
-    Accepts a question and returns a conversational answer based on the book content.
-    Uses RAG (Retrieval-Augmented Generation) to provide helpful explanations.
+    Accepts a question and returns a conversational answer.
+    Uses RAG (Retrieval-Augmented Generation) when vector database is available,
+    otherwise falls back to normal chatbot mode.
     """
     vector_store: Optional[VectorStore] = request.app.state.vector_store
     llm_service: Optional[LLMService] = request.app.state.llm_service
 
-    # Check if vector store is available
-    if not vector_store:
-        return {
-            "answer": "The vector database is not available. Please check the server configuration and ensure Qdrant Cloud is properly set up.",
-            "sources": []
-        }
+    # Try to retrieve relevant context from the book (if vector store available)
+    response_chunks = []
+    rag_mode = False
+    
+    if vector_store:
+        try:
+            filter_dict = None
+            if ask_request.chapter_id:
+                filter_dict = {"chapter_id": ask_request.chapter_id}
 
-    # Step 1: Retrieve relevant context from the book
-    try:
-        filter_dict = None
-        if ask_request.chapter_id:
-            filter_dict = {"chapter_id": ask_request.chapter_id}
+            search_results = vector_store.query(
+                query=ask_request.question,
+                filter_dict=filter_dict,
+                top_k=3
+            )
 
-        search_results = vector_store.query(
-            query=ask_request.question,
-            filter_dict=filter_dict,
-            top_k=3
-        )
+            # Format search results for response
+            for result in search_results:
+                response_chunks.append({
+                    "payload": result.payload,
+                    "score": result.score,
+                })
+            
+            if response_chunks:
+                rag_mode = True
+                logger.info(f"RAG mode: Found {len(response_chunks)} relevant chunks")
+        except Exception as e:
+            logger.warning(f"Error querying vector store: {e}. Falling back to normal chatbot mode.")
+            response_chunks = []
+            rag_mode = False
 
-        # Format search results for response
-        response_chunks = []
-        for result in search_results:
-            response_chunks.append({
-                "payload": result.payload,
-                "score": result.score,
-            })
-    except Exception as e:
-        logger.error(f"Error querying vector store: {e}")
-        return {
-            "answer": f"Error searching the knowledge base: {str(e)}. The collection may not exist yet. Please run document ingestion first.",
-            "sources": []
-        }
-
-    # Step 2: Generate conversational answer using LLM
+    # Generate answer using LLM
     answer = None
     if llm_service:
         try:
-            answer = llm_service.generate_answer(
-                question=ask_request.question,
-                context_chunks=response_chunks
-            )
+            if rag_mode:
+                # RAG mode: Use context from vector database
+                answer = llm_service.generate_answer(
+                    question=ask_request.question,
+                    context_chunks=response_chunks
+                )
+            else:
+                # Normal chatbot mode: Direct LLM response
+                answer = llm_service.generate_direct_answer(ask_request.question)
+                logger.info("Normal chatbot mode: Using LLM without RAG")
         except Exception as e:
             logger.error(f"Error generating answer: {e}")
-            # Fallback to simple context-based response
-            answer = _generate_fallback_answer(ask_request.question, response_chunks)
+            # Fallback to simple response
+            if response_chunks:
+                answer = _generate_fallback_answer(ask_request.question, response_chunks)
+            else:
+                answer = "I'm having trouble processing your question right now. Please try again later."
     else:
-        # No LLM service - use fallback
-        answer = _generate_fallback_answer(ask_request.question, response_chunks)
+        # No LLM service available
+        if response_chunks:
+            answer = _generate_fallback_answer(ask_request.question, response_chunks)
+        else:
+            answer = "The chatbot service is not available. Please check the server configuration."
 
-    # Return both the answer and the source chunks
+    # Return both the answer and the source chunks (empty if normal mode)
     return {
         "answer": answer,
-        "sources": response_chunks
+        "sources": response_chunks,
+        "mode": "rag" if rag_mode else "normal"
     }
 
 def _generate_fallback_answer(question: str, chunks: List[Dict]) -> str:
