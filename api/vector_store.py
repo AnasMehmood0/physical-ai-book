@@ -49,7 +49,7 @@ class VectorStore:
             self.client.create_collection(
                 collection_name=self.collection_name,
                 vectors_config=models.VectorParams(
-                    size=self.embedding_model.model.get_sentence_embedding_dimension(),
+                    size=self.embedding_model.get_sentence_embedding_dimension(),
                     distance=models.Distance.COSINE,
                 ),
             )
