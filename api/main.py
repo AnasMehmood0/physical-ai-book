@@ -18,18 +18,22 @@ logger = logging.getLogger(__name__)
 
 @contextlib.asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize VectorStore
-    vector_store = VectorStore()
+    # Initialize VectorStore with error handling
+    try:
+        vector_store = VectorStore()
+        app.state.vector_store = vector_store
+        logger.info("VectorStore initialized successfully")
 
-    # Only ingest documents on startup in local mode
-    # For cloud mode, documents should be ingested separately
-    qdrant_mode = os.getenv("QDRANT_MODE", "local")
-    if qdrant_mode == "local":
-        docs_dir = os.getenv("DOCS_DIRECTORY", "web/docs")
-        if os.path.exists(docs_dir):
-            ingest_documents(docs_dir, vector_store)
-
-    app.state.vector_store = vector_store
+        # Only ingest documents on startup in local mode
+        # For cloud mode, documents should be ingested separately
+        qdrant_mode = os.getenv("QDRANT_MODE", "local")
+        if qdrant_mode == "local":
+            docs_dir = os.getenv("DOCS_DIRECTORY", "web/docs")
+            if os.path.exists(docs_dir):
+                ingest_documents(docs_dir, vector_store)
+    except Exception as e:
+        logger.error(f"Failed to initialize VectorStore: {e}")
+        app.state.vector_store = None
 
     # Initialize LLM service
     try:
@@ -41,8 +45,14 @@ async def lifespan(app: FastAPI):
         app.state.llm_service = None
 
     yield
-    print("Closing Qdrant client")
-    app.state.vector_store.client.close()
+
+    # Clean up
+    if hasattr(app.state, 'vector_store') and app.state.vector_store:
+        try:
+            app.state.vector_store.client.close()
+            logger.info("Qdrant client closed")
+        except Exception as e:
+            logger.error(f"Error closing Qdrant client: {e}")
 
 app = FastAPI(lifespan=lifespan)
 
@@ -73,27 +83,41 @@ def ask(request: Request, ask_request: AskRequest):
     Accepts a question and returns a conversational answer based on the book content.
     Uses RAG (Retrieval-Augmented Generation) to provide helpful explanations.
     """
-    vector_store: VectorStore = request.app.state.vector_store
+    vector_store: Optional[VectorStore] = request.app.state.vector_store
     llm_service: Optional[LLMService] = request.app.state.llm_service
 
+    # Check if vector store is available
+    if not vector_store:
+        return {
+            "answer": "The vector database is not available. Please check the server configuration and ensure Qdrant Cloud is properly set up.",
+            "sources": []
+        }
+
     # Step 1: Retrieve relevant context from the book
-    filter_dict = None
-    if ask_request.chapter_id:
-        filter_dict = {"chapter_id": ask_request.chapter_id}
+    try:
+        filter_dict = None
+        if ask_request.chapter_id:
+            filter_dict = {"chapter_id": ask_request.chapter_id}
 
-    search_results = vector_store.query(
-        query=ask_request.question,
-        filter_dict=filter_dict,
-        top_k=3
-    )
+        search_results = vector_store.query(
+            query=ask_request.question,
+            filter_dict=filter_dict,
+            top_k=3
+        )
 
-    # Format search results for response
-    response_chunks = []
-    for result in search_results:
-        response_chunks.append({
-            "payload": result.payload,
-            "score": result.score,
-        })
+        # Format search results for response
+        response_chunks = []
+        for result in search_results:
+            response_chunks.append({
+                "payload": result.payload,
+                "score": result.score,
+            })
+    except Exception as e:
+        logger.error(f"Error querying vector store: {e}")
+        return {
+            "answer": f"Error searching the knowledge base: {str(e)}. The collection may not exist yet. Please run document ingestion first.",
+            "sources": []
+        }
 
     # Step 2: Generate conversational answer using LLM
     answer = None
@@ -141,6 +165,6 @@ def _generate_fallback_answer(question: str, chunks: List[Dict]) -> str:
         return "I found relevant sections but couldn't extract the text. Please check the document ingestion."
 
     answer = intro + "\n\n".join(context_parts[:2])  # Show top 2 chunks
-    answer += f"\n\n💡 Note: I'm currently running in simple mode. For more conversational explanations, please configure a valid Gemini API key."
+    answer += f"\n\nNote: I'm currently running in simple mode. For more conversational explanations, please configure a valid Gemini API key."
 
     return answer
