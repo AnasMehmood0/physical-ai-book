@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-foundations/hardware-lab" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">02. Hardware Lab | Physical AI Book</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://anasmehmood0.github.io/physical-ai-book/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://anasmehmood0.github.io/physical-ai-book/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://anasmehmood0.github.io/physical-ai-book/docs/foundations/hardware-lab"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="02. Hardware Lab | Physical AI Book"><meta data-rh="true" name="description" content="Sim Rig vs Edge Kit specs"><meta data-rh="true" property="og:description" content="Sim Rig vs Edge Kit specs"><link data-rh="true" rel="icon" href="/physical-ai-book/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://anasmehmood0.github.io/physical-ai-book/docs/foundations/hardware-lab"><link data-rh="true" rel="alternate" href="https://anasmehmood0.github.io/physical-ai-book/docs/foundations/hardware-lab" hreflang="en"><link data-rh="true" rel="alternate" href="https://anasmehmood0.github.io/physical-ai-book/docs/foundations/hardware-lab" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"02. Hardware Lab","item":"https://anasmehmood0.github.io/physical-ai-book/docs/foundations/hardware-lab"}]}</script><link rel="alternate" type="application/rss+xml" href="/physical-ai-book/blog/rss.xml" title="Physical AI Book RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/physical-ai-book/blog/atom.xml" title="Physical AI Book Atom Feed"><link rel="stylesheet" href="/physical-ai-book/assets/css/styles.28b30a6a.css">
+<script src="/physical-ai-book/assets/js/runtime~main.04c92617.js" defer="defer"></script>
+<script src="/physical-ai-book/assets/js/main.96c1eeaf.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/physical-ai-book/img/logo.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/physical-ai-book/"><div class="navbar__logo"><img src="/physical-ai-book/img/logo.svg" alt="Physical AI Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/physical-ai-book/img/logo.svg" alt="Physical AI Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Physical AI Book</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/physical-ai-book/docs/foundations/embodied-intelligence">Read Book</a><a class="navbar__item navbar__link" href="/physical-ai-book/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/AnasMehmood0/physical-ai-book" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/physical-ai-book/docs/foundations/embodied-intelligence"><span title="01. Foundations" class="categoryLinkLabel_W154">01. Foundations</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/physical-ai-book/docs/foundations/embodied-intelligence"><span title="01. Embodied Intelligence" class="linkLabel_WmDU">01. Embodied Intelligence</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/physical-ai-book/docs/foundations/hardware-lab"><span title="02. Hardware Lab" class="linkLabel_WmDU">02. Hardware Lab</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/physical-ai-book/docs/ros2/architecture"><span title="02. ROS 2 System" class="categoryLinkLabel_W154">02. ROS 2 System</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/physical-ai-book/docs/simulation/gazebo-physics"><span title="03. Simulation" class="categoryLinkLabel_W154">03. Simulation</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/physical-ai-book/docs/isaac/isaac-sdk"><span title="04. Isaac Brain" class="categoryLinkLabel_W154">04. Isaac Brain</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/physical-ai-book/docs/vla/whisper-voice"><span title="05. VLA &amp; Capstone" class="categoryLinkLabel_W154">05. VLA &amp; Capstone</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/physical-ai-book/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">01. Foundations</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">02. Hardware Lab</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>02. Hardware Lab</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sim-rig-vs-edge-kit-specs">Sim Rig vs Edge Kit specs<a href="#sim-rig-vs-edge-kit-specs" class="hash-link" aria-label="Direct link to Sim Rig vs Edge Kit specs" title="Direct link to Sim Rig vs Edge Kit specs" translate="no">​</a></h2>
+<p>This chapter delves into the specifications and comparative analysis of two primary hardware setups for physical AI development: the Simulation Rig (Sim Rig) and the Edge Kit. It outlines the technical details, computational capabilities, sensor suites, and actuator types typically found in each.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="overview">Overview<a href="#overview" class="hash-link" aria-label="Direct link to Overview" title="Direct link to Overview" translate="no">​</a></h2>
+<p>Physical AI development requires different hardware configurations depending on your goals:</p>
+<ul>
+<li class=""><strong>Simulation Rig</strong>: High-performance workstation for training and testing in virtual environments</li>
+<li class=""><strong>Edge Kit</strong>: Embedded computing platform for deploying AI on physical robots</li>
+<li class=""><strong>Hybrid Setup</strong>: Combination approach for complete development workflow</li>
+</ul>
+<p>Understanding the trade-offs between these approaches is essential for efficient Physical AI development.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="simulation-development-rig">Simulation Development Rig<a href="#simulation-development-rig" class="hash-link" aria-label="Direct link to Simulation Development Rig" title="Direct link to Simulation Development Rig" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="purpose-and-use-cases">Purpose and Use Cases<a href="#purpose-and-use-cases" class="hash-link" aria-label="Direct link to Purpose and Use Cases" title="Direct link to Purpose and Use Cases" translate="no">​</a></h3>
+<p>A simulation rig is optimized for:</p>
+<ul>
+<li class=""><strong>Training AI models</strong>: Deep learning, reinforcement learning</li>
+<li class=""><strong>Physics simulation</strong>: Gazebo, Isaac Sim, MuJoCo, Unity</li>
+<li class=""><strong>Large-scale testing</strong>: Parallel simulations, Monte Carlo testing</li>
+<li class=""><strong>Development iteration</strong>: Fast code-test-debug cycles</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="hardware-specifications">Hardware Specifications<a href="#hardware-specifications" class="hash-link" aria-label="Direct link to Hardware Specifications" title="Direct link to Hardware Specifications" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="gpu-critical-component">GPU (Critical Component)<a href="#gpu-critical-component" class="hash-link" aria-label="Direct link to GPU (Critical Component)" title="Direct link to GPU (Critical Component)" translate="no">​</a></h4>
+<p><strong>Recommended:</strong></p>
+<ul>
+<li class="">NVIDIA RTX 4090 (24GB VRAM) - Best performance</li>
+<li class="">NVIDIA RTX 4080 (16GB VRAM) - Good balance</li>
+<li class="">NVIDIA RTX 3090 (24GB VRAM) - Budget option with high VRAM</li>
+</ul>
+<p><strong>Minimum:</strong></p>
+<ul>
+<li class="">NVIDIA RTX 3060 (12GB VRAM)</li>
+<li class="">NVIDIA GTX 1080 Ti (11GB VRAM)</li>
+</ul>
+<p><strong>Why NVIDIA?</strong></p>
+<ul>
+<li class="">CUDA support required for PyTorch, TensorFlow</li>
+<li class="">Isaac Sim requires RTX GPUs with ray tracing</li>
+<li class="">Better driver support for robotics software</li>
+</ul>
+<p><strong>VRAM Considerations:</strong></p>
+<ul>
+<li class="">8GB: Basic simulations, small models</li>
+<li class="">12GB: Medium models, single robot simulations</li>
+<li class="">16-24GB: Large models, multi-robot simulations, Isaac Sim</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="cpu">CPU<a href="#cpu" class="hash-link" aria-label="Direct link to CPU" title="Direct link to CPU" translate="no">​</a></h4>
+<p><strong>Recommended:</strong></p>
+<ul>
+<li class="">AMD Ryzen 9 7950X (16 cores)</li>
+<li class="">Intel Core i9-13900K (24 cores)</li>
+<li class="">AMD Threadripper (for parallel simulations)</li>
+</ul>
+<p><strong>Minimum:</strong></p>
+<ul>
+<li class="">8 cores, 16 threads</li>
+<li class="">Base clock 3.0+ GHz</li>
+</ul>
+<p><strong>Why it matters:</strong></p>
+<ul>
+<li class="">Physics simulation is CPU-intensive</li>
+<li class="">Parallel environment training (e.g., Isaac Gym)</li>
+<li class="">Compilation of large codebases</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ram">RAM<a href="#ram" class="hash-link" aria-label="Direct link to RAM" title="Direct link to RAM" translate="no">​</a></h4>
+<p><strong>Recommended:</strong></p>
+<ul>
+<li class="">64GB DDR5</li>
+<li class="">32GB minimum for serious work</li>
+</ul>
+<p><strong>Breakdown:</strong></p>
+<ul>
+<li class="">16GB: OS and background processes</li>
+<li class="">16GB: Simulation engine</li>
+<li class="">16GB: AI training</li>
+<li class="">16GB+: Large datasets, multiple environments</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="storage">Storage<a href="#storage" class="hash-link" aria-label="Direct link to Storage" title="Direct link to Storage" translate="no">​</a></h4>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li class=""><strong>OS Drive</strong>: 500GB NVMe SSD (PCIe 4.0)</li>
+<li class=""><strong>Data Drive</strong>: 2TB NVMe SSD for datasets</li>
+<li class=""><strong>Backup</strong>: 4TB HDD for model checkpoints</li>
+</ul>
+<p><strong>Why NVMe?</strong></p>
+<ul>
+<li class="">Fast dataset loading (ImageNet, robotic datasets)</li>
+<li class="">Quick checkpoint saving during training</li>
+<li class="">Faster Docker container operations</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="software-stack">Software Stack<a href="#software-stack" class="hash-link" aria-label="Direct link to Software Stack" title="Direct link to Software Stack" translate="no">​</a></h3>
+<p><strong>Operating System:</strong></p>
+<ul>
+<li class="">Ubuntu 22.04 LTS (recommended for ROS 2)</li>
+<li class="">Ubuntu 20.04 LTS (for older ROS 2 versions)</li>
+<li class="">Windows 11 (with WSL2 for Linux tools)</li>
+</ul>
+<p><strong>Essential Software:</strong></p>
+<ul>
+<li class=""><strong>ROS 2</strong>: Humble Hawksbill or Iron Irwini</li>
+<li class=""><strong>Simulation</strong>: Gazebo Fortress, Isaac Sim, Unity ML-Agents</li>
+<li class=""><strong>AI Frameworks</strong>: PyTorch 2.0+, TensorFlow 2.x</li>
+<li class=""><strong>Docker</strong>: For containerized development</li>
+<li class=""><strong>NVIDIA Drivers</strong>: 525+ with CUDA 11.8 or 12.x</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="estimated-cost">Estimated Cost<a href="#estimated-cost" class="hash-link" aria-label="Direct link to Estimated Cost" title="Direct link to Estimated Cost" translate="no">​</a></h3>
+<table><thead><tr><th>Component</th><th>Budget</th><th>Mid-Range</th><th>High-End</th></tr></thead><tbody><tr><td>GPU</td><td>RTX 3060 ($400)</td><td>RTX 4070 Ti ($800)</td><td>RTX 4090 ($1,600)</td></tr><tr><td>CPU</td><td>Ryzen 5 7600X ($250)</td><td>Ryzen 7 7700X ($350)</td><td>Ryzen 9 7950X ($550)</td></tr><tr><td>RAM</td><td>32GB ($120)</td><td>64GB ($240)</td><td>128GB ($480)</td></tr><tr><td>Storage</td><td>1TB SSD ($80)</td><td>2TB SSD ($150)</td><td>4TB SSD ($300)</td></tr><tr><td>Motherboard</td><td>$150</td><td>$250</td><td>$400</td></tr><tr><td>PSU</td><td>750W ($100)</td><td>850W ($130)</td><td>1000W ($180)</td></tr><tr><td>Case + Cooling</td><td>$150</td><td>$250</td><td>$400</td></tr><tr><td><strong>Total</strong></td><td><strong>~$1,250</strong></td><td><strong>~$2,170</strong></td><td><strong>~$3,910</strong></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="edge-deployment-kit">Edge Deployment Kit<a href="#edge-deployment-kit" class="hash-link" aria-label="Direct link to Edge Deployment Kit" title="Direct link to Edge Deployment Kit" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="purpose-and-use-cases-1">Purpose and Use Cases<a href="#purpose-and-use-cases-1" class="hash-link" aria-label="Direct link to Purpose and Use Cases" title="Direct link to Purpose and Use Cases" translate="no">​</a></h3>
+<p>Edge kits are designed for:</p>
+<ul>
+<li class=""><strong>On-robot inference</strong>: Running trained models on physical hardware</li>
+<li class=""><strong>Real-time control</strong>: Low-latency sensor processing and actuation</li>
+<li class=""><strong>Autonomous operation</strong>: Battery-powered, mobile deployment</li>
+<li class=""><strong>Field testing</strong>: Real-world validation</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="popular-edge-platforms">Popular Edge Platforms<a href="#popular-edge-platforms" class="hash-link" aria-label="Direct link to Popular Edge Platforms" title="Direct link to Popular Edge Platforms" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="nvidia-jetson-family">NVIDIA Jetson Family<a href="#nvidia-jetson-family" class="hash-link" aria-label="Direct link to NVIDIA Jetson Family" title="Direct link to NVIDIA Jetson Family" translate="no">​</a></h4>
+<p><strong>Jetson Orin Nano (Recommended for learning):</strong></p>
+<ul>
+<li class="">GPU: 1024 CUDA cores, 32 Tensor cores</li>
+<li class="">CPU: 6-core ARM Cortex-A78AE</li>
+<li class="">RAM: 8GB LPDDR5</li>
+<li class="">Power: 7-15W</li>
+<li class="">Price: ~$500</li>
+<li class="">Use case: Mobile robots, drones, small humanoids</li>
+</ul>
+<p><strong>Jetson Orin NX:</strong></p>
+<ul>
+<li class="">GPU: 1024 CUDA cores, 32 Tensor cores</li>
+<li class="">CPU: 8-core ARM Cortex-A78AE</li>
+<li class="">RAM: 16GB LPDDR5</li>
+<li class="">Power: 10-25W</li>
+<li class="">Price: ~$800</li>
+<li class="">Use case: Medium-sized robots, warehouse automation</li>
+</ul>
+<p><strong>Jetson AGX Orin:</strong></p>
+<ul>
+<li class="">GPU: 2048 CUDA cores, 64 Tensor cores</li>
+<li class="">CPU: 12-core ARM Cortex-A78AE</li>
+<li class="">RAM: 32-64GB LPDDR5</li>
+<li class="">Power: 15-60W</li>
+<li class="">Price: ~$2,000</li>
+<li class="">Use case: Autonomous vehicles, complex manipulation</li>
+</ul>
+<p><strong>Key Advantages:</strong></p>
+<ul>
+<li class="">Native CUDA support</li>
+<li class="">JetPack SDK with ROS 2 support</li>
+<li class="">TensorRT for optimized inference</li>
+<li class="">Isaac ROS packages</li>
+<li class="">Power-efficient AI acceleration</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="raspberry-pi-budget-option">Raspberry Pi (Budget Option)<a href="#raspberry-pi-budget-option" class="hash-link" aria-label="Direct link to Raspberry Pi (Budget Option)" title="Direct link to Raspberry Pi (Budget Option)" translate="no">​</a></h4>
+<p><strong>Raspberry Pi 5:</strong></p>
+<ul>
+<li class="">CPU: Quad-core ARM Cortex-A76 @ 2.4GHz</li>
+<li class="">RAM: 4GB or 8GB LPDDR4</li>
+<li class="">GPU: VideoCore VII (no CUDA)</li>
+<li class="">Power: 5W</li>
+<li class="">Price: ~$80</li>
+<li class="">Use case: Simple robots, learning, hobby projects</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li class="">No GPU acceleration for deep learning</li>
+<li class="">Lower compute power</li>
+<li class="">Best for classical robotics, not heavy AI</li>
+</ul>
+<p><strong>Good for:</strong></p>
+<ul>
+<li class="">Educational robots</li>
+<li class="">Sensor data collection</li>
+<li class="">ROS 2 message routing</li>
+<li class="">Lightweight vision (OpenCV)</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="intel-nuc--mini-pcs">Intel NUC / Mini PCs<a href="#intel-nuc--mini-pcs" class="hash-link" aria-label="Direct link to Intel NUC / Mini PCs" title="Direct link to Intel NUC / Mini PCs" translate="no">​</a></h4>
+<p><strong>Intel NUC 13 Extreme:</strong></p>
+<ul>
+<li class="">CPU: Core i9-13900K (desktop-class)</li>
+<li class="">GPU: Can fit RTX 4070 (via PCIe)</li>
+<li class="">RAM: Up to 64GB DDR5</li>
+<li class="">Power: 650W</li>
+<li class="">Price: ~$1,500-2,000</li>
+<li class="">Use case: Stationary robots, research platforms</li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li class="">Desktop-class performance</li>
+<li class="">Upgradeable GPU</li>
+<li class="">Standard x86 software compatibility</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li class="">Higher power consumption</li>
+<li class="">Larger form factor</li>
+<li class="">Not battery-friendly</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="peripherals-and-sensors">Peripherals and Sensors<a href="#peripherals-and-sensors" class="hash-link" aria-label="Direct link to Peripherals and Sensors" title="Direct link to Peripherals and Sensors" translate="no">​</a></h3>
+<p><strong>Essential Additions:</strong></p>
+<ul>
+<li class=""><strong>Camera</strong>: Intel RealSense D435i ($300) or generic USB webcam ($50)</li>
+<li class=""><strong>LiDAR</strong>: RPLIDAR A1 ($100) or Hokuyo UST-10LX ($1,500)</li>
+<li class=""><strong>IMU</strong>: BNO055 ($30) or VectorNav VN-100 ($500)</li>
+<li class=""><strong>Motor Controllers</strong>: ODrive ($120), VESC ($150), or Dynamixel servos ($50-300 each)</li>
+<li class=""><strong>Power</strong>: Lithium battery (varies), voltage regulators, power distribution</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="estimated-edge-kit-cost">Estimated Edge Kit Cost<a href="#estimated-edge-kit-cost" class="hash-link" aria-label="Direct link to Estimated Edge Kit Cost" title="Direct link to Estimated Edge Kit Cost" translate="no">​</a></h3>
+<table><thead><tr><th>Configuration</th><th>Components</th><th>Total Cost</th></tr></thead><tbody><tr><td><strong>Budget</strong></td><td>Raspberry Pi 5 (8GB) + basic sensors + motors</td><td>~$400</td></tr><tr><td><strong>Mid-Range</strong></td><td>Jetson Orin Nano + RealSense + RPLIDAR</td><td>~$1,200</td></tr><tr><td><strong>Professional</strong></td><td>Jetson AGX Orin + high-end sensors + actuators</td><td>~$5,000+</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hybrid-development-workflow">Hybrid Development Workflow<a href="#hybrid-development-workflow" class="hash-link" aria-label="Direct link to Hybrid Development Workflow" title="Direct link to Hybrid Development Workflow" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="recommended-setup">Recommended Setup<a href="#recommended-setup" class="hash-link" aria-label="Direct link to Recommended Setup" title="Direct link to Recommended Setup" translate="no">​</a></h3>
+<p><strong>For Most Developers:</strong></p>
+<ol>
+<li class=""><strong>Sim Rig</strong>: Mid-range GPU workstation ($2,000-3,000)</li>
+<li class=""><strong>Edge Kit</strong>: Jetson Orin Nano ($500) + basic sensors ($500)</li>
+<li class=""><strong>Total</strong>: ~$3,000-4,000</li>
+</ol>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li class="">Develop and train on sim rig (fast iteration)</li>
+<li class="">Export optimized model (TensorRT, ONNX)</li>
+<li class="">Deploy to edge kit for real-world testing</li>
+<li class="">Collect real-world data, transfer back to sim rig</li>
+<li class="">Retrain with real data, redeploy</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cloud-alternative">Cloud Alternative<a href="#cloud-alternative" class="hash-link" aria-label="Direct link to Cloud Alternative" title="Direct link to Cloud Alternative" translate="no">​</a></h3>
+<p><strong>When to use cloud:</strong></p>
+<ul>
+<li class="">No upfront hardware cost</li>
+<li class="">Access to latest GPUs (A100, H100)</li>
+<li class="">Scalable for large experiments</li>
+<li class="">Team collaboration</li>
+</ul>
+<p><strong>Cloud Providers:</strong></p>
+<ul>
+<li class=""><strong>AWS EC2</strong>: g5.xlarge (<del>$1/hour) to p4d.24xlarge (</del>$32/hour)</li>
+<li class=""><strong>Google Cloud</strong>: n1-standard-8 + T4 (~$0.50/hour)</li>
+<li class=""><strong>Lambda Labs</strong>: A100 instances (~$1.10/hour)</li>
+<li class=""><strong>Paperspace</strong>: Gradient platform with Jupyter notebooks</li>
+</ul>
+<p><strong>Cost Comparison:</strong></p>
+<ul>
+<li class="">Sim rig purchase: $2,000 upfront, $0 ongoing</li>
+<li class="">Cloud at 40 hours/week: $0 upfront, ~$2,000/year (at $1/hour)</li>
+<li class="">Break-even: ~1 year of heavy usage</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li class="">No physical robot testing</li>
+<li class="">Network latency for remote development</li>
+<li class="">Ongoing costs can exceed hardware</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="software-setup-guide">Software Setup Guide<a href="#software-setup-guide" class="hash-link" aria-label="Direct link to Software Setup Guide" title="Direct link to Software Setup Guide" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="simulation-rig-setup">Simulation Rig Setup<a href="#simulation-rig-setup" class="hash-link" aria-label="Direct link to Simulation Rig Setup" title="Direct link to Simulation Rig Setup" translate="no">​</a></h3>
+<p><strong>Step 1: Install Ubuntu 22.04</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Create bootable USB with Ubuntu 22.04 LTS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># Install with &quot;Minimal installation&quot; option</span><br></span></code></pre></div></div>
+<p><strong>Step 2: Install NVIDIA Drivers</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install nvidia-driver-525</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo reboot</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">nvidia-smi  # Verify installation</span><br></span></code></pre></div></div>
+<p><strong>Step 3: Install ROS 2 Humble</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install software-properties-common</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo add-apt-repository universe</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update &amp;&amp; sudo apt install curl -y</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release &amp;&amp; echo $UBUNTU_CODENAME) main&quot; | sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install ros-humble-desktop</span><br></span></code></pre></div></div>
+<p><strong>Step 4: Install PyTorch</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span><br></span></code></pre></div></div>
+<p><strong>Step 5: Install Gazebo</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install ros-humble-gazebo-ros-pkgs</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="jetson-edge-kit-setup">Jetson Edge Kit Setup<a href="#jetson-edge-kit-setup" class="hash-link" aria-label="Direct link to Jetson Edge Kit Setup" title="Direct link to Jetson Edge Kit Setup" translate="no">​</a></h3>
+<p><strong>Step 1: Flash JetPack</strong></p>
+<ul>
+<li class="">Download NVIDIA SDK Manager</li>
+<li class="">Flash JetPack 5.1+ to Jetson device</li>
+<li class="">Includes Ubuntu 20.04, CUDA, cuDNN, TensorRT</li>
+</ul>
+<p><strong>Step 2: Install ROS 2</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># On Jetson (ARM architecture)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install ros-humble-ros-base</span><br></span></code></pre></div></div>
+<p><strong>Step 3: Install Isaac ROS</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install ros-humble-isaac-ros-common</span><br></span></code></pre></div></div>
+<p><strong>Step 4: Optimize for inference</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Install TensorRT (included in JetPack)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># Convert PyTorch model to TensorRT:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># import torch_tensorrt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># trt_model = torch_tensorrt.compile(model, ...)</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="validation-and-testing">Validation and Testing<a href="#validation-and-testing" class="hash-link" aria-label="Direct link to Validation and Testing" title="Direct link to Validation and Testing" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sim-rig-validation">Sim Rig Validation<a href="#sim-rig-validation" class="hash-link" aria-label="Direct link to Sim Rig Validation" title="Direct link to Sim Rig Validation" translate="no">​</a></h3>
+<p><strong>GPU Test:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Run PyTorch CUDA test</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">python -c &quot;import torch; print(torch.cuda.is_available())&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">python -c &quot;import torch; print(torch.cuda.get_device_name(0))&quot;</span><br></span></code></pre></div></div>
+<p><strong>Gazebo Test:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ros2 launch gazebo_ros gazebo.launch.py</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># Should open Gazebo GUI without errors</span><br></span></code></pre></div></div>
+<p><strong>Training Test:</strong></p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Run small training loop</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> torch</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> torch</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">nn</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">Linear</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">cuda</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">optimizer </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> torch</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">optim</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">Adam</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">model</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">parameters</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">for</span><span class="token plain"> i </span><span class="token keyword" style="color:#00009f">in</span><span class="token plain"> </span><span class="token builtin">range</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">100</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    x </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> torch</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">randn</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">32</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">cuda</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    y </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> model</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">x</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">mean</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    y</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">backward</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    optimizer</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">step</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">print</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;Training successful!&quot;</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="edge-kit-validation">Edge Kit Validation<a href="#edge-kit-validation" class="hash-link" aria-label="Direct link to Edge Kit Validation" title="Direct link to Edge Kit Validation" translate="no">​</a></h3>
+<p><strong>Inference Test:</strong></p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> torch</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> torch</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">jit</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">load</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;model.pt&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> model</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">cuda</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">input_tensor </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> torch</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">randn</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">3</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">224</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">224</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">cuda</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">with</span><span class="token plain"> torch</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">no_grad</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    output </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> model</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">input_tensor</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">print</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string-interpolation string" style="color:#e3116c">f&quot;Inference successful: </span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">{</span><span class="token string-interpolation interpolation">output</span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">.</span><span class="token string-interpolation interpolation">shape</span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">}</span><span class="token string-interpolation string" style="color:#e3116c">&quot;</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
+<p><strong>Sensor Test:</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Test camera</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ros2 run usb_cam usb_cam_node_exe</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ros2 topic echo /image_raw</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># Test LiDAR</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ros2 run rplidar_ros rplidar_composition</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ros2 topic echo /scan</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="common-issues-and-solutions">Common Issues and Solutions<a href="#common-issues-and-solutions" class="hash-link" aria-label="Direct link to Common Issues and Solutions" title="Direct link to Common Issues and Solutions" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sim-rig-issues">Sim Rig Issues<a href="#sim-rig-issues" class="hash-link" aria-label="Direct link to Sim Rig Issues" title="Direct link to Sim Rig Issues" translate="no">​</a></h3>
+<p><strong>Issue: CUDA out of memory</strong></p>
+<ul>
+<li class="">Solution: Reduce batch size, use gradient accumulation, enable mixed precision training</li>
+</ul>
+<p><strong>Issue: Gazebo crashes</strong></p>
+<ul>
+<li class="">Solution: Update drivers, reduce physics simulation rate, use headless mode</li>
+</ul>
+<p><strong>Issue: Slow training</strong></p>
+<ul>
+<li class="">Solution: Check GPU utilization (nvidia-smi), use data loading workers, optimize data pipeline</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="edge-kit-issues">Edge Kit Issues<a href="#edge-kit-issues" class="hash-link" aria-label="Direct link to Edge Kit Issues" title="Direct link to Edge Kit Issues" translate="no">​</a></h3>
+<p><strong>Issue: Model too slow on Jetson</strong></p>
+<ul>
+<li class="">Solution: Quantize model (INT8), use TensorRT, reduce model size, prune unnecessary layers</li>
+</ul>
+<p><strong>Issue: Out of memory on Jetson</strong></p>
+<ul>
+<li class="">Solution: Reduce input resolution, use model pruning, enable swap memory, close background processes</li>
+</ul>
+<p><strong>Issue: Power consumption too high</strong></p>
+<ul>
+<li class="">Solution: Use Jetson power modes (nvpmodel), optimize code, reduce inference frequency</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="key-takeaways">Key Takeaways<a href="#key-takeaways" class="hash-link" aria-label="Direct link to Key Takeaways" title="Direct link to Key Takeaways" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Sim Rig</strong>: High-performance GPU workstation for training and simulation</li>
+<li class=""><strong>Edge Kit</strong>: Power-efficient embedded platform for on-robot deployment</li>
+<li class=""><strong>NVIDIA Jetson</strong>: Best edge platform for AI robotics (CUDA support)</li>
+<li class=""><strong>Hybrid workflow</strong>: Develop in simulation, deploy to edge</li>
+<li class=""><strong>Budget</strong>: $1,250-$3,900 for sim rig, $400-$2,000 for edge kit</li>
+<li class=""><strong>Cloud</strong>: Alternative to sim rig for scalable training</li>
+<li class=""><strong>Validation</strong>: Test GPU, simulation, training pipeline before starting development</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="further-reading">Further Reading<a href="#further-reading" class="hash-link" aria-label="Direct link to Further Reading" title="Direct link to Further Reading" translate="no">​</a></h2>
+<ul>
+<li class="">NVIDIA Jetson Documentation: <a href="https://developer.nvidia.com/embedded/jetson" target="_blank" rel="noopener noreferrer" class="">https://developer.nvidia.com/embedded/jetson</a></li>
+<li class="">ROS 2 Installation Guide: <a href="https://docs.ros.org/en/humble/Installation.html" target="_blank" rel="noopener noreferrer" class="">https://docs.ros.org/en/humble/Installation.html</a></li>
+<li class="">Isaac Sim Documentation: <a href="https://docs.omniverse.nvidia.com/isaacsim/" target="_blank" rel="noopener noreferrer" class="">https://docs.omniverse.nvidia.com/isaacsim/</a></li>
+<li class="">Gazebo Tutorials: <a href="https://gazebosim.org/docs" target="_blank" rel="noopener noreferrer" class="">https://gazebosim.org/docs</a></li>
+<li class="">TensorRT Optimization Guide: <a href="https://docs.nvidia.com/deeplearning/tensorrt/" target="_blank" rel="noopener noreferrer" class="">https://docs.nvidia.com/deeplearning/tensorrt/</a></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/AnasMehmood0/physical-ai-book/tree/main/web/docs/foundations/hardware-lab.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/physical-ai-book/docs/foundations/embodied-intelligence"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">01. Embodied Intelligence</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/physical-ai-book/docs/ros2/architecture"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">01. Architecture</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#sim-rig-vs-edge-kit-specs" class="table-of-contents__link toc-highlight">Sim Rig vs Edge Kit specs</a></li><li><a href="#overview" class="table-of-contents__link toc-highlight">Overview</a></li><li><a href="#simulation-development-rig" class="table-of-contents__link toc-highlight">Simulation Development Rig</a><ul><li><a href="#purpose-and-use-cases" class="table-of-contents__link toc-highlight">Purpose and Use Cases</a></li><li><a href="#hardware-specifications" class="table-of-contents__link toc-highlight">Hardware Specifications</a></li><li><a href="#software-stack" class="table-of-contents__link toc-highlight">Software Stack</a></li><li><a href="#estimated-cost" class="table-of-contents__link toc-highlight">Estimated Cost</a></li></ul></li><li><a href="#edge-deployment-kit" class="table-of-contents__link toc-highlight">Edge Deployment Kit</a><ul><li><a href="#purpose-and-use-cases-1" class="table-of-contents__link toc-highlight">Purpose and Use Cases</a></li><li><a href="#popular-edge-platforms" class="table-of-contents__link toc-highlight">Popular Edge Platforms</a></li><li><a href="#peripherals-and-sensors" class="table-of-contents__link toc-highlight">Peripherals and Sensors</a></li><li><a href="#estimated-edge-kit-cost" class="table-of-contents__link toc-highlight">Estimated Edge Kit Cost</a></li></ul></li><li><a href="#hybrid-development-workflow" class="table-of-contents__link toc-highlight">Hybrid Development Workflow</a><ul><li><a href="#recommended-setup" class="table-of-contents__link toc-highlight">Recommended Setup</a></li><li><a href="#cloud-alternative" class="table-of-contents__link toc-highlight">Cloud Alternative</a></li></ul></li><li><a href="#software-setup-guide" class="table-of-contents__link toc-highlight">Software Setup Guide</a><ul><li><a href="#simulation-rig-setup" class="table-of-contents__link toc-highlight">Simulation Rig Setup</a></li><li><a href="#jetson-edge-kit-setup" class="table-of-contents__link toc-highlight">Jetson Edge Kit Setup</a></li></ul></li><li><a href="#validation-and-testing" class="table-of-contents__link toc-highlight">Validation and Testing</a><ul><li><a href="#sim-rig-validation" class="table-of-contents__link toc-highlight">Sim Rig Validation</a></li><li><a href="#edge-kit-validation" class="table-of-contents__link toc-highlight">Edge Kit Validation</a></li></ul></li><li><a href="#common-issues-and-solutions" class="table-of-contents__link toc-highlight">Common Issues and Solutions</a><ul><li><a href="#sim-rig-issues" class="table-of-contents__link toc-highlight">Sim Rig Issues</a></li><li><a href="#edge-kit-issues" class="table-of-contents__link toc-highlight">Edge Kit Issues</a></li></ul></li><li><a href="#key-takeaways" class="table-of-contents__link toc-highlight">Key Takeaways</a></li><li><a href="#further-reading" class="table-of-contents__link toc-highlight">Further Reading</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/physical-ai-book/docs/intro">Read Book</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/AnasMehmood0/physical-ai-book" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Physical AI Book. Built with Docusaurus.</div></div></div></footer><div class="globalChatWidget_VdqR"><button class="chatToggleButton_owIk" aria-label="Open chat">💬</button></div></div>
+</body>
+</html>
