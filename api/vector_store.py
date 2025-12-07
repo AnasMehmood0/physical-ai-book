@@ -1,18 +1,44 @@
 import uuid
+import os
 from qdrant_client import QdrantClient, models
 
 from api.embedding_model import EmbeddingModel
 
 
 class VectorStore:
-    def __init__(self, collection_name: str = "book_chunks"):
+    def __init__(
+        self,
+        collection_name: str = None,
+        qdrant_mode: str = None,
+        qdrant_path: str = None,
+        qdrant_url: str = None,
+        qdrant_api_key: str = None
+    ):
         """
         Initializes the vector store.
         Args:
             collection_name: The name of the Qdrant collection to use.
+            qdrant_mode: Mode of operation ('local' or 'cloud').
+            qdrant_path: Path for local Qdrant storage.
+            qdrant_url: URL for cloud Qdrant instance.
+            qdrant_api_key: API key for cloud Qdrant instance.
         """
-        self.client = QdrantClient(path="./qdrant_storage")  # Use file-based storage
-        self.collection_name = collection_name
+        # Load from environment variables if not provided
+        self.collection_name = collection_name or os.getenv("QDRANT_COLLECTION_NAME", "book_chunks")
+        mode = qdrant_mode or os.getenv("QDRANT_MODE", "local")
+
+        # Initialize Qdrant client based on mode
+        if mode == "cloud":
+            url = qdrant_url or os.getenv("QDRANT_URL")
+            api_key = qdrant_api_key or os.getenv("QDRANT_API_KEY")
+            if not url or not api_key:
+                raise ValueError("QDRANT_URL and QDRANT_API_KEY must be set for cloud mode")
+            self.client = QdrantClient(url=url, api_key=api_key)
+        else:
+            # Local mode
+            path = qdrant_path or os.getenv("QDRANT_PATH", "./qdrant_storage")
+            self.client = QdrantClient(path=path)
+
         self.embedding_model = EmbeddingModel()
 
         self.client.recreate_collection(

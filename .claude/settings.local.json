@@ -36,7 +36,12 @@
       "Bash(export:*)",
       "Bash(set:*)",
       "SlashCommand(/sp.tasks)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npm run clear:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git merge:*)"
     ],
     "deny": [],
     "ask": []

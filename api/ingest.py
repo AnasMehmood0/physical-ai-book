@@ -1,7 +1,11 @@
 import os
 import argparse
+from dotenv import load_dotenv
 from langchain_text_splitters import MarkdownTextSplitter
 from api.vector_store import VectorStore
+
+# Load environment variables
+load_dotenv()
 
 def ingest_documents(directory_path: str, vector_store: VectorStore):
     """
@@ -10,7 +14,11 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
         directory_path: The path to the directory containing the documents.
         vector_store: An instance of the VectorStore.
     """
-    text_splitter = MarkdownTextSplitter(chunk_size=256, chunk_overlap=32)
+    # Get chunk configuration from environment
+    chunk_size = int(os.getenv("CHUNK_SIZE", "256"))
+    chunk_overlap = int(os.getenv("CHUNK_OVERLAP", "32"))
+
+    text_splitter = MarkdownTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
 
     for root, _, files in os.walk(directory_path):
         for file in files:
@@ -20,12 +28,21 @@ def ingest_documents(directory_path: str, vector_store: VectorStore):
                     content = f.read()
                 
                 chunks = text_splitter.split_text(content)
-                
+
                 # Assuming chapter_id is derived from the file name or path
                 # This needs to be adapted to the actual book structure
                 chapter_id = os.path.splitext(file)[0]
-                metadatas = [{"chapter_id": chapter_id, "source": file} for _ in chunks]
-                
+
+                # Create metadatas with the actual text content included
+                metadatas = [
+                    {
+                        "chapter_id": chapter_id,
+                        "source": file,
+                        "text": chunk  # Store the actual text content
+                    }
+                    for chunk in chunks
+                ]
+
                 vector_store.add_documents(chunks, metadatas)
                 print(f"Ingested {len(chunks)} chunks from {file}")
 
