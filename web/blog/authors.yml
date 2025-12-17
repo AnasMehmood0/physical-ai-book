@@ -1,0 +1,5 @@
+admin:
+  name: Admin User
+  title: Blog Administrator
+  url: https://github.com/admin
+  image_url: https://github.com/admin.png

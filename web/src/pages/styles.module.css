@@ -1,0 +1,283 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ *
+ * Dark, sleek aesthetic for Physical AI textbook homepage
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.hero-image {
+  max-width: 60%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.text--center {
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+  background-color: #f8f9fa;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.startButton {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.startButton:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.corePillars {
+  padding: 3rem 0;
+  background-color: white;
+}
+
+.corePillars h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #1e293b;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.pillarsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.pillar {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pillar h3 {
+  margin-top: 0;
+  color: #0f172a;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.pillar p {
+  color: #64748b;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+/* Color coding for Core Pillars */
+.pillar:nth-child(1) { /* Perception */
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+}
+
+.pillar:nth-child(2) { /* Actuation */
+  background: linear-gradient(135deg, #f0fdf4 0%, #bbf3c9 100%);
+}
+
+.pillar:nth-child(3) { /* Cognition */
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+.pillar:nth-child(4) { /* Learning & Adaptation */
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+}
+
+/* Color coding for Complete Book Structure */
+.pillar:nth-child(5),
+.pillar:nth-child(6),
+.pillar:nth-child(7) {
+  background: white;
+  border: 2px solid transparent;
+}
+
+.pillar:nth-child(5) { /* Chapter 1 */
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.pillar:nth-child(6) { /* Chapter 2 */
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+}
+
+.pillar:nth-child(7) { /* Chapter 3 */
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.pillar:nth-child(8) { /* Chapter 4 */
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf3c9 100%);
+}
+
+.pillar:nth-child(9) { /* Chapter 5 */
+  background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+}
+
+/* Add colored accent bars */
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 1;
+}
+
+.pillar:nth-child(1)::before { /* Perception */
+  background: linear-gradient(90deg, #0ea5e9, #0284c7);
+}
+
+.pillar:nth-child(2)::before { /* Actuation */
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.pillar:nth-child(3)::before { /* Cognition */
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.pillar:nth-child(4)::before { /* Learning & Adaptation */
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+
+.pillar:nth-child(5)::before { /* Chapter 1 */
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.pillar:nth-child(6)::before { /* Chapter 2 */
+  background: linear-gradient(90deg, #a855f7, #7e22ce);
+}
+
+.pillar:nth-child(7)::before { /* Chapter 3 */
+  background: linear-gradient(90deg, #eab308, #ca8a04);
+}
+
+.pillar:nth-child(8)::before { /* Chapter 4 */
+  background: linear-gradient(90deg, #22c55e, #15803d);
+}
+
+.pillar:nth-child(9)::before { /* Chapter 5 */
+  background: linear-gradient(90deg, #ec4899, #db2777);
+}
+
+.section {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1e293b;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.section p {
+  text-align: center;
+  color: #64748b;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+.nextSteps {
+  background-color: #f1f5f9;
+  padding: 3rem 0;
+}
+
+.nextSteps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nextSteps li {
+  background: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.nextSteps li:hover {
+  transform: translateX(5px);
+}
+
+.nextSteps a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nextSteps a:hover {
+  text-decoration: underline;
+}

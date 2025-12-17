@@ -1,8 +1,0 @@
-qdrant_storage/
-qdrant_db/
-qdrant_test_db/
-.venv/
-__pycache__/
-*.pyc
-.pytest_cache/
-tests/

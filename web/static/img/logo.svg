@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Robot head with AI elements -->
+  <rect x="25" y="25" width="50" height="50" rx="10" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+
+  <!-- Eyes -->
+  <circle cx="40" cy="40" r="5" fill="white"/>
+  <circle cx="60" cy="40" r="5" fill="white"/>
+  <circle cx="40" cy="40" r="2" fill="#1e40af"/>
+  <circle cx="60" cy="40" r="2" fill="#1e40af"/>
+
+  <!-- AI circuit pattern -->
+  <path d="M30 60 Q40 55 50 60 T70 60" stroke="white" stroke-width="2" fill="none"/>
+  <path d="M35 65 Q45 60 55 65 T65 65" stroke="white" stroke-width="1" fill="none"/>
+
+  <!-- Body -->
+  <rect x="40" y="75" width="20" height="15" fill="#1e40af"/>
+
+  <!-- Arms -->
+  <line x1="35" y1="70" x2="25" y2="65" stroke="#1e40af" stroke-width="3"/>
+  <line x1="65" y1="70" x2="75" y2="65" stroke="#1e40af" stroke-width="3"/>
+
+  <!-- Base -->
+  <rect x="35" y="90" width="30" height="5" fill="#1e40af"/>
+</svg>
